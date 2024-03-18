@@ -33,8 +33,15 @@ function shallowCopy(obj) {
  *    mergeObjects([{a: 1, b: 2}, {b: 3, c: 5}]) => {a: 1, b: 5, c: 5}
  *    mergeObjects([]) => {}
  */
-function mergeObjects(/* objects */) {
-  throw new Error('Not implemented');
+function mergeObjects(objects) {
+  return objects
+    .flatMap((obj) => Object.entries(obj))
+    .reduce((result, [key, value]) => {
+      return {
+        ...result,
+        [key]: (result[key] || 0) + value,
+      };
+    }, {});
 }
 
 /**
